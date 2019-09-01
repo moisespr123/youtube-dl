@@ -692,6 +692,9 @@ MSO_INFO = {
     'leh010': {
         'name': 'Lehigh Valley Cooperative Telephone'
     },
+    'lib040': {
+        'name': 'Liberty Cablevision of Puerto Rico'
+    },
     'bra010': {
         'name': 'Limestone Cable/Bracken Cable'
     },
