@@ -1,12 +1,16 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
+import json
 import re
 
 from .common import InfoExtractor
 from ..utils import (
+    ExtractorError,
     extract_attributes,
     int_or_none,
+    js_to_json,
+    merge_dicts,
 )
 
 
@@ -73,3 +77,70 @@ class PokemonIE(InfoExtractor):
             'episode_number': int_or_none(video_data.get('data-video-episode')),
             'ie_key': 'LimelightMedia',
         }
+
+
+class PokemonWatchIE(InfoExtractor):
+    _VALID_URL = r'https?://watch\.pokemon\.com/[a-z]{2}-[a-z]{2}/player\.html\?id=(?P<id>[a-z0-9]{32})'
+    _API_URL = 'https://www.pokemon.com/api/pokemontv/v2/channels/{0:}'
+    _TESTS = [{
+        'url': 'https://watch.pokemon.com/en-gb/player.html?id=1b0e462fc0184fbfb8d239956c0e0e4f',
+        'md5': '275f23caa823fbf37aa2535e9ce737eb',
+        'info_dict': {
+            'id': '1b0e462fc0184fbfb8d239956c0e0e4f',
+            'ext': 'mp4',
+            'title': 'Disguise Da Limit',
+            'description': 'md5:e773dd385d30bed15b79fa736383f594',
+            'timestamp': 1417786182,
+            'upload_date': '20141205',
+        }
+    }, {
+        'url': 'https://watch.pokemon.com/de-de/player.html?id=b85ebd49197e49259c4f01780b0585f7',
+        'only_matching': True
+    }]
+
+    def _extract_media(self, channel_array, video_id):
+        for channel in channel_array:
+            for media in channel.get('media'):
+                if media.get('id') == video_id:
+                    return media
+        return None
+
+    def _real_extract(self, url):
+        video_id = self._match_id(url)
+
+        info = {
+            '_type': 'url',
+            'id': video_id,
+            'url': 'limelight:media:%s' % video_id,
+            'ie_key': 'LimelightMedia',
+        }
+
+        # API call can be avoided entirely if we are listing formats
+        if self._downloader.params.get('listformats', False):
+            return info
+
+        webpage = self._download_webpage(url, video_id)
+        build_vars = self._parse_json(self._search_regex(
+            r'(?s)buildVars\s*=\s*({.*?})', webpage, 'build vars'),
+            video_id, transform_source=js_to_json)
+        region = build_vars.get('region')
+        channel_array = json.loads(
+            self._download_webpage(self._API_URL.format(region), video_id))
+        video_data = self._extract_media(channel_array, video_id)
+
+        if video_data is None:
+            raise ExtractorError(
+                'Video %s does not exist' % video_id, expected=True)
+
+        info['_type'] = 'url_transparent'
+        images = video_data.get('images')
+
+        return merge_dicts(info, {
+            'title': video_data.get('title'),
+            'description': video_data.get('description'),
+            'thumbnail': images.get('medium') or images.get('small'),
+            'series': 'Pokémon',
+            'season_number': int_or_none(video_data.get('season')),
+            'episode': video_data.get('title'),
+            'episode_number': int_or_none(video_data.get('episode')),
+        })
