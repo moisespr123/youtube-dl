@@ -104,6 +104,8 @@ from .bild import BildIE
 from .bilibili import (
     BiliBiliIE,
     BiliBiliBangumiIE,
+    BilibiliAudioIE,
+    BilibiliAudioAlbumIE,
 )
 from .biobiochiletv import BioBioChileTVIE
 from .bitchute import (
@@ -891,7 +893,6 @@ from .puhutv import (
     PuhuTVSerieIE,
 )
 from .presstv import PressTVIE
-from .promptfile import PromptFileIE
 from .prosiebensat1 import ProSiebenSat1IE
 from .puls4 import Puls4IE
 from .pyvideo import PyvideoIE
@@ -1127,6 +1128,7 @@ from .telegraaf import TelegraafIE
 from .telemb import TeleMBIE
 from .telequebec import (
     TeleQuebecIE,
+    TeleQuebecSquatIE,
     TeleQuebecEmissionIE,
     TeleQuebecLiveIE,
 )
@@ -1280,7 +1282,6 @@ from .varzesh3 import Varzesh3IE
 from .vbox7 import Vbox7IE
 from .veehd import VeeHDIE
 from .veoh import VeohIE
-from .vessel import VesselIE
 from .vesti import VestiIE
 from .vevo import (
     VevoIE,
@@ -1411,7 +1412,6 @@ from .weibo import (
     WeiboMobileIE
 )
 from .weiqitv import WeiqiTVIE
-from .wimp import WimpIE
 from .wistia import WistiaIE
 from .worldstarhiphop import WorldStarHipHopIE
 from .wsj import (
