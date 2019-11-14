@@ -1586,12 +1586,12 @@ class InfoExtractor(object):
     def _extract_m3u8_formats(self, m3u8_url, video_id, ext=None,
                               entry_protocol='m3u8', preference=None,
                               m3u8_id=None, note=None, errnote=None,
-                              fatal=True, live=False):
+                              fatal=True, live=False, headers={}):
         res = self._download_webpage_handle(
             m3u8_url, video_id,
             note=note or 'Downloading m3u8 information',
             errnote=errnote or 'Failed to download m3u8 information',
-            fatal=fatal)
+            fatal=fatal, headers=headers)
 
         if res is False:
             return []
@@ -2009,12 +2009,12 @@ class InfoExtractor(object):
             })
         return entries
 
-    def _extract_mpd_formats(self, mpd_url, video_id, mpd_id=None, note=None, errnote=None, fatal=True, formats_dict={}):
+    def _extract_mpd_formats(self, mpd_url, video_id, mpd_id=None, note=None, errnote=None, fatal=True, formats_dict={}, headers={}):
         res = self._download_xml_handle(
             mpd_url, video_id,
             note=note or 'Downloading MPD manifest',
             errnote=errnote or 'Failed to download MPD manifest',
-            fatal=fatal)
+            fatal=fatal, headers=headers)
         if res is False:
             return []
         mpd_doc, urlh = res
@@ -2689,7 +2689,7 @@ class InfoExtractor(object):
             entry = {
                 'id': this_video_id,
                 'title': unescapeHTML(video_data['title'] if require_title else video_data.get('title')),
-                'description': video_data.get('description'),
+                'description': clean_html(video_data.get('description')),
                 'thumbnail': urljoin(base_url, self._proto_relative_url(video_data.get('image'))),
                 'timestamp': int_or_none(video_data.get('pubdate')),
                 'duration': float_or_none(jwplayer_data.get('duration') or video_data.get('duration')),
