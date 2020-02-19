@@ -26,13 +26,13 @@
  - **AcademicEarth:Course**
  - **acast**
  - **acast:channel**
- - **AddAnime**
  - **ADN**: Anime Digital Network
  - **AdobeConnect**
- - **AdobeTV**
- - **AdobeTVChannel**
- - **AdobeTVShow**
- - **AdobeTVVideo**
+ - **adobetv**
+ - **adobetv:channel**
+ - **adobetv:embed**
+ - **adobetv:show**
+ - **adobetv:video**
  - **AdultSwim**
  - **aenetworks**: A+E Networks: A&E, Lifetime, History.com, FYI Network and History Vault
  - **afreecatv**: afreecatv.com
@@ -175,7 +175,6 @@
  - **CNN**
  - **CNNArticle**
  - **CNNBlogs**
- - **ComCarCoff**
  - **ComedyCentral**
  - **ComedyCentralFullEpisodes**
  - **ComedyCentralShortname**
@@ -203,8 +202,6 @@
  - **dailymotion**
  - **dailymotion:playlist**
  - **dailymotion:user**
- - **DaisukiMotto**
- - **DaisukiMottoPlaylist**
  - **daum.net**
  - **daum.net:clip**
  - **daum.net:playlist**
@@ -392,7 +389,6 @@
  - **JeuxVideo**
  - **Joj**
  - **Jove**
- - **jpopsuki.tv**
  - **JWPlatform**
  - **Kakao**
  - **Kaltura**
@@ -400,13 +396,14 @@
  - **Kankan**
  - **Karaoketv**
  - **KarriereVideos**
+ - **Katsomo**
  - **KeezMovies**
  - **Ketnet**
  - **KhanAcademy**
  - **KickStarter**
+ - **KinjaEmbed**
  - **KinoPoisk**
  - **KonserthusetPlay**
- - **kontrtube**: KontrTube.ru - Труба зовёт
  - **KrasView**: Красвью
  - **Ku6**
  - **KUSI**
@@ -485,14 +482,12 @@
  - **Mgoon**
  - **MGTV**: 芒果TV
  - **MiaoPai**
- - **Minhateca**
  - **MinistryGrid**
  - **Minoto**
  - **miomio.tv**
  - **MiTele**: mitele.es
  - **mixcloud**
  - **mixcloud:playlist**
- - **mixcloud:stream**
  - **mixcloud:user**
  - **Mixer:live**
  - **Mixer:vod**
@@ -518,7 +513,6 @@
  - **mtvjapan**
  - **mtvservices:embedded**
  - **MuenchenTV**: münchen.tv
- - **MusicPlayOn**
  - **mva**: Microsoft Virtual Academy videos
  - **mva:course**: Microsoft Virtual Academy courses
  - **Mwave**
@@ -623,7 +617,6 @@
  - **OnionStudios**
  - **Ooyala**
  - **OoyalaExternal**
- - **Openload**
  - **OraTV**
  - **orf:fm4**: radio FM4
  - **orf:fm4:story**: fm4.orf.at stories
@@ -634,7 +627,6 @@
  - **OutsideTV**
  - **PacktPub**
  - **PacktPubCourse**
- - **PandaTV**: 熊猫TV
  - **pandora.tv**: 판도라TV
  - **ParamountNetwork**
  - **parliamentlive.tv**: UK parliament videos
@@ -670,6 +662,7 @@
  - **Pokemon**
  - **PolskieRadio**
  - **PolskieRadioCategory**
+ - **Popcorntimes**
  - **PopcornTV**
  - **PornCom**
  - **PornerBros**
@@ -723,8 +716,6 @@
  - **Restudy**
  - **Reuters**
  - **ReverbNation**
- - **revision**
- - **revision3:embed**
  - **RICE**
  - **RMCDecouverte**
  - **RockstarGames**
@@ -769,6 +760,7 @@
  - **screen.yahoo:search**: Yahoo screen search
  - **Screencast**
  - **ScreencastOMatic**
+ - **ScrippsNetworks**
  - **scrippsnetworks:watch**
  - **SCTE**
  - **SCTECourse**
@@ -832,7 +824,6 @@
  - **Steam**
  - **Stitcher**
  - **Streamable**
- - **Streamango**
  - **streamcloud.eu**
  - **StreamCZ**
  - **StreetVoice**
@@ -922,6 +913,7 @@
  - **tv2.hu**
  - **TV2Article**
  - **TV2DK**
+ - **TV2DKBornholmPlay**
  - **TV4**: tv4.se and tv4play.se
  - **TV5MondePlus**: TV5MONDE+
  - **TVA**
@@ -958,10 +950,12 @@
  - **twitch:vod**
  - **twitter**
  - **twitter:amplify**
+ - **twitter:broadcast**
  - **twitter:card**
  - **udemy**
  - **udemy:course**
  - **UDNEmbed**: 聯合影音
+ - **UFCArabia**
  - **UFCTV**
  - **UKTVPlay**
  - **umg:de**: Universal Music Deutschland
@@ -982,7 +976,6 @@
  - **Vbox7**
  - **VeeHD**
  - **Veoh**
- - **verystream**
  - **Vesti**: Вести.Ru
  - **Vevo**
  - **VevoPlaylist**
@@ -1002,7 +995,6 @@
  - **videomore**
  - **videomore:season**
  - **videomore:video**
- - **VideoPremium**
  - **VideoPress**
  - **Vidio**
  - **VidLii**
@@ -1012,8 +1004,8 @@
  - **Vidzi**
  - **vier**: vier.be and vijf.be
  - **vier:videos**
- - **ViewLift**
- - **ViewLiftEmbed**
+ - **viewlift**
+ - **viewlift:embed**
  - **Viidea**
  - **viki**
  - **viki:channel**

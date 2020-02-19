@@ -1,8 +1,9 @@
 # coding: utf-8
 from __future__ import unicode_literals
 
-import re
 import json
+import re
+import sys
 
 from .common import InfoExtractor
 from ..utils import (
@@ -91,11 +92,15 @@ class IviIE(InfoExtractor):
                     'contentid': video_id
                 }
             ]
-        }).encode()
+        })
+
+        bundled = hasattr(sys, 'frozen')
 
         for site in (353, 183):
-            content_data = data % site
+            content_data = (data % site).encode()
             if site == 353:
+                if bundled:
+                    continue
                 try:
                     from Cryptodome.Cipher import Blowfish
                     from Cryptodome.Hash import CMAC
@@ -135,9 +140,13 @@ class IviIE(InfoExtractor):
                     extractor_msg = 'Video %s does not exist'
                 elif site == 353:
                     continue
+                elif bundled:
+                    raise ExtractorError(
+                        'This feature does not work from bundled exe. Run youtube-dl from sources.',
+                        expected=True)
                 elif not pycryptodomex_found:
                     raise ExtractorError(
-                        'pycryptodome not found. Please install it.',
+                        'pycryptodomex not found. Please install it.',
                         expected=True)
                 elif message:
                     extractor_msg += ': ' + message
@@ -230,7 +239,7 @@ class IviCompilationIE(InfoExtractor):
             self.url_result(
                 'http://www.ivi.ru/watch/%s/%s' % (compilation_id, serie), IviIE.ie_key())
             for serie in re.findall(
-                r'<a href="/watch/%s/(\d+)"[^>]+data-id="\1"' % compilation_id, html)]
+                r'<a\b[^>]+\bhref=["\']/watch/%s/(\d+)["\']' % compilation_id, html)]
 
     def _real_extract(self, url):
         mobj = re.match(self._VALID_URL, url)
