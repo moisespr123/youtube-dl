@@ -804,6 +804,16 @@ from .orf import (
     ORFFM4IE,
     ORFFM4StoryIE,
     ORFOE1IE,
+    ORFOE3IE,
+    ORFNOEIE,
+    ORFWIEIE,
+    ORFBGLIE,
+    ORFOOEIE,
+    ORFSTMIE,
+    ORFKTNIE,
+    ORFSBGIE,
+    ORFTIRIE,
+    ORFVBGIE,
     ORFIPTVIE,
 )
 from .outsidetv import OutsideTVIE
@@ -911,7 +921,9 @@ from .rbmaradio import RBMARadioIE
 from .rds import RDSIE
 from .redbulltv import (
     RedBullTVIE,
+    RedBullEmbedIE,
     RedBullTVRrnContentIE,
+    RedBullIE,
 )
 from .reddit import (
     RedditIE,
@@ -1222,14 +1234,11 @@ from .twentymin import TwentyMinutenIE
 from .twentythreevideo import TwentyThreeVideoIE
 from .twitcasting import TwitCastingIE
 from .twitch import (
-    TwitchVideoIE,
-    TwitchChapterIE,
     TwitchVodIE,
-    TwitchProfileIE,
-    TwitchAllVideosIE,
-    TwitchUploadsIE,
-    TwitchPastBroadcastsIE,
-    TwitchHighlightsIE,
+    TwitchCollectionIE,
+    TwitchVideosIE,
+    TwitchVideosClipsIE,
+    TwitchVideosCollectionsIE,
     TwitchStreamIE,
     TwitchClipsIE,
 )
