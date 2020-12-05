@@ -76,7 +76,7 @@ class PokemonIE(InfoExtractor):
 
 
 class PokemonWatchIE(InfoExtractor):
-    _VALID_URL = r'https?://watch\.pokemon\.com/[a-z]{2}-[a-z]{2}/player\.html\?id=(?P<id>[a-z0-9]{32})'
+    _VALID_URL = r'https?://watch\.pokemon\.com/[a-z]{2}-[a-z]{2}/#/player\?id=(?P<id>[a-z0-9]{32})'
     _API_URL = 'https://www.pokemon.com/api/pokemontv/v2/channels/{0:}'
     _TESTS = [{
         'url': 'https://watch.pokemon.com/en-gb/player.html?id=1b0e462fc0184fbfb8d239956c0e0e4f',
