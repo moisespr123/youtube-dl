@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.org/ytdl-org/youtube-dl)
+[![Build Status](https://travis-ci.com/ytdl-org/youtube-dl.svg?branch=master)](https://travis-ci.com/ytdl-org/youtube-dl)
 
 youtube-dl - download videos from youtube.com or other video platforms
 
@@ -371,7 +371,7 @@ Alternatively, refer to the [developer instructions](#developer-instructions) fo
                                      out, youtube-dl will ask interactively.
     -2, --twofactor TWOFACTOR        Two-factor authentication code
     -n, --netrc                      Use .netrc authentication data
-    --video-password PASSWORD        Video password (vimeo, smotri, youku)
+    --video-password PASSWORD        Video password (vimeo, youku)
 
 ## Adobe Pass Options:
     --ap-mso MSO                     Adobe Pass multiple-system operator (TV

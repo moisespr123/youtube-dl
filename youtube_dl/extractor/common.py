@@ -336,8 +336,8 @@ class InfoExtractor(object):
     object, each element of which is a valid dictionary by this specification.
 
     Additionally, playlists can have "id", "title", "description", "uploader",
-    "uploader_id", "uploader_url" attributes with the same semantics as videos
-    (see above).
+    "uploader_id", "uploader_url", "duration" attributes with the same semantics
+    as videos (see above).
 
 
     _type "multi_video" indicates that there are multiple videos that
@@ -1237,8 +1237,16 @@ class InfoExtractor(object):
             'ViewAction': 'view',
         }
 
+        def extract_interaction_type(e):
+            interaction_type = e.get('interactionType')
+            if isinstance(interaction_type, dict):
+                interaction_type = interaction_type.get('@type')
+            return str_or_none(interaction_type)
+
         def extract_interaction_statistic(e):
             interaction_statistic = e.get('interactionStatistic')
+            if isinstance(interaction_statistic, dict):
+                interaction_statistic = [interaction_statistic]
             if not isinstance(interaction_statistic, list):
                 return
             for is_e in interaction_statistic:
@@ -1246,8 +1254,8 @@ class InfoExtractor(object):
                     continue
                 if is_e.get('@type') != 'InteractionCounter':
                     continue
-                interaction_type = is_e.get('interactionType')
-                if not isinstance(interaction_type, compat_str):
+                interaction_type = extract_interaction_type(is_e)
+                if not interaction_type:
                     continue
                 # For interaction count some sites provide string instead of
                 # an integer (as per spec) with non digit characters (e.g. ",")
@@ -2513,16 +2521,18 @@ class InfoExtractor(object):
         # amp-video and amp-audio are very similar to their HTML5 counterparts
         # so we wll include them right here (see
         # https://www.ampproject.org/docs/reference/components/amp-video)
-        media_tags = [(media_tag, media_type, '')
-                      for media_tag, media_type
-                      in re.findall(r'(?s)(<(?:amp-)?(video|audio)[^>]*/>)', webpage)]
+        # For dl8-* tags see https://delight-vr.com/documentation/dl8-video/
+        _MEDIA_TAG_NAME_RE = r'(?:(?:amp|dl8(?:-live)?)-)?(video|audio)'
+        media_tags = [(media_tag, media_tag_name, media_type, '')
+                      for media_tag, media_tag_name, media_type
+                      in re.findall(r'(?s)(<(%s)[^>]*/>)' % _MEDIA_TAG_NAME_RE, webpage)]
         media_tags.extend(re.findall(
             # We only allow video|audio followed by a whitespace or '>'.
             # Allowing more characters may end up in significant slow down (see
             # https://github.com/ytdl-org/youtube-dl/issues/11979, example URL:
             # http://www.porntrex.com/maps/videositemap.xml).
-            r'(?s)(<(?P<tag>(?:amp-)?(?:video|audio))(?:\s+[^>]*)?>)(.*?)</(?P=tag)>', webpage))
-        for media_tag, media_type, media_content in media_tags:
+            r'(?s)(<(?P<tag>%s)(?:\s+[^>]*)?>)(.*?)</(?P=tag)>' % _MEDIA_TAG_NAME_RE, webpage))
+        for media_tag, _, media_type, media_content in media_tags:
             media_info = {
                 'formats': [],
                 'subtitles': {},
